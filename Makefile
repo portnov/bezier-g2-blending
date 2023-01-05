@@ -6,4 +6,4 @@ bezier5.pdf: bezier5.tex bezier5.mp
 	pdflatex bezier5.tex
 
 clean:
-	rm *.log *.aux
+	rm *.log *.aux *.mpx
