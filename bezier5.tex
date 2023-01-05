@@ -65,13 +65,6 @@ One may note, that it is always possible to replace our equations \eqref{normal}
 (this is what called C2 continuity).
 Then from equations \eqref{C0}, \eqref{C1} and \eqref{C2} it would be quite simple to derive equations for our control points. However, the equation \eqref{C2} is more strong than \eqref{normal} and \eqref{curvature}, as we will see in details later. If we experiment a bit with C2 continuity, we will see, that geometrically makes our blending curve follow the "inertia" of $\varphi$ and $\psi$ very strongly, and thus, the blending curve with C2 continuity can be bent too much in order to look "naturally". Figure \ref{fig:C2} illustrates what we mean.
 
-\begin{figure}[h]
-\caption{C2-continuous blending of two curves}
-\label{fig:C2}
-\includegraphics{bezier5.1}
-\centering
-\end{figure}
-
 \section{Determining first two pairs of control points}
 
 First, from \eqref{C0} and \eqref{bezier} we can obviously state that
@@ -150,16 +143,40 @@ Also we know that $C$ lies in the plane, which goes through point $A$ and $B$, a
 Obviously we can invent different conditions for location of $C$. For example,
 \begin{enumerate}
   \item we can simply let $\vc{BC}$ be parallel to $\mathbf{n}(\gamma)(0)$, i.e. let $C = B + d\mathbf{n}(\gamma)(0)$. There is no clear geometrical reason for this, but this is computationally the simplest idea.
-  \item we can say that we want to minimize $|\gamma''(0)|$. Then we should let $C = B + d\mathbf{n}(\gamma)(0) + \vc{AB}$.
-  \item or we may want $C$ to lie somewhere near the line $(B_1B_2)$ -- as near as possible. Some experiments show that this tends to give nice enough curves.
+  \item Or we can say that we want to minimize $|\gamma''(0)|$.
+  \item Or we may want $C$ to lie somewhere near the line $(B_1B_2)$ -- as near as possible. Some experiments show that this tends to give nice enough curves.
 \end{enumerate}
 
-We will continue with the latest condition.
+\section{Minimizing $|\gamma''(0)|$}
+
+Let's consider the second condition. From \eqref{secondderivative}, we can write the second derivative of $\gamma$ at $t=0$ as
+$$
+\gamma''(0) = 20(\vc{AC} - 2\vc{AB}).
+$$
+From this equation it is clear that if we want to minimize $|\gamma''(0)|$, we need to make $C$ as close to $A + 2\vc{AB}$ as possible, while remaining on the line $l$. This is achieved when $A + 2\vc{AB}$ is the projection of $C$ to $(AB)$ line (refer to fig. \ref{fig:minimize}).
+
+\begin{figure}[h]
+  \caption{Minimizing the second derivative}
+  \label{fig:minimize}
+  \includegraphics{bezier5.3}
+  \centering
+\end{figure}
+
+From the same picture it is now clear that in such a case we can write $C$ as
+\begin{equation}\label{Cbyminimize}
+  C = B + \vc{AB} + d\mathbf{n}(\gamma)(0)
+\end{equation}
+
+Figure \ref{fig:minimizedCurve} is the example of what these formulas give for the same initial curves that were used for fig.\ref{fig:C2}.
+
+\section{Putting $C$ near $(B_1B_2)$ line}
+
+We will now concentrate on the latest condition.
 
 \begin{figure}[h]
   \caption{Location of point $C$ near $(B_1B_2)$ line}
   \label{fig:nearest}
-  \includegraphics{bezier5.3}
+  \includegraphics{bezier5.4}
   \centering
 \end{figure}
 
@@ -239,10 +256,30 @@ So, finally, subsituting \eqref{t2} and \eqref{t1} into \eqref{Cfromt1}, we have
   C = B_1 + d\mathbf{n} + d\frac{(\vec{a}, \vec{b})(\mathbf{n}, \vec{b})}{1 - (\vec{a}, \vec{b})^2}\vec{a}
 \end{equation}
 
-Following is the example of what these formulas give for the same initial curves that were used for fig.\ref{fig:C2}:
+Figure \ref{fig:b1b2} is the example of what these formulas give for the same initial curves that were used for fig.\ref{fig:C2}.
+
+\section{Resulting blending curves}
+
+The following figures show what kind of curves are received by using different approaches we discussed above.
+
+\begin{figure}[h]
+  \caption{C2-continuous blending of two curves}
+  \label{fig:C2}
+  \includegraphics{bezier5.1}
+  \centering
+\end{figure}
+
 \begin{figure}[ht]
-  \caption{G2-continous blending of two curves}
-  \includegraphics{bezier5.4}
+  \caption{G2-continous blending of two curves, second derivative minimized}
+  \label{fig:minimizedCurve}
+  \includegraphics{bezier5.5}
+  \centering
+\end{figure}
+
+\begin{figure}[ht]
+  \caption{G2-continous blending of two curves, $C$ points aligned by $(B_1B_2)$}
+  \label{fig:b1b2}
+  \includegraphics{bezier5.6}
   \centering
 \end{figure}
 
