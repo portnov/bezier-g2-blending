@@ -53,7 +53,7 @@ that it has G2-continuous joints with the end of first curve ($\varphi$) and wit
 
 Obviously, there are a lot of curves that satisfy these conditions. But in addition, we want our curve $\gamma$ to be a Bezier curve. We will show that to satisfy these conditions, it is enough to use Bezier curve of 5th degree (with 6 control points). We will search our curve in the following form:
 \begin{equation}\label{bezier}
-\gamma(t) = A_1(1-t)^5 + B_1(1-t)^4t + C_1(1-t)^3t^2 + C_2(1-t)^2t^3 + B_2(1-t)t^4 + A_2t^5
+\gamma(t) = A_1(1-t)^5 + 5B_1(1-t)^4t + 10C_1(1-t)^3t^2 + 10C_2(1-t)^2t^3 + 5B_2(1-t)t^4 + A_2t^5
 \end{equation}
 Here $A_1$, $A_2$, $B_1$, $B_2$, $C_1$ and $C_2$ are control points of our Bezier curve. They are to be found.
 
